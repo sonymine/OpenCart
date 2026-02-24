@@ -1,0 +1,31 @@
+16:08:11.796 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:08:12.674 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:08:15.702 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:08:15.778 [main] INFO  testCases.TC001_AccountRegistrationTest - **Finished TC001_AccountRegistrationTes**
+16:20:42.325 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:20:43.264 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:20:46.046 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:20:46.144 [main] ERROR testCases.TC001_AccountRegistrationTest - Test failed..
+16:22:24.330 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:22:25.432 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:22:28.287 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:22:28.370 [main] ERROR testCases.TC001_AccountRegistrationTest - Test failed..
+16:24:06.802 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:24:07.755 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:24:10.005 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:24:10.095 [main] ERROR testCases.TC001_AccountRegistrationTest - Test failed..
+16:24:10.095 [main] DEBUG testCases.TC001_AccountRegistrationTest - Debug logs..
+16:31:16.089 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:31:16.832 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:31:19.238 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:31:19.343 [main] ERROR testCases.TC001_AccountRegistrationTest - Test failed..
+16:31:19.344 [main] DEBUG testCases.TC001_AccountRegistrationTest - Debug logs..
+16:33:35.660 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:33:36.256 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:33:38.105 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:33:38.138 [main] ERROR testCases.TC001_AccountRegistrationTest - Test failed..
+16:33:38.138 [main] DEBUG testCases.TC001_AccountRegistrationTest - Debug logs..
+16:36:18.260 [main] INFO  testCases.TC001_AccountRegistrationTest - **Starting TC001_AccountRegistrationTes**
+16:36:18.760 [main] INFO  testCases.TC001_AccountRegistrationTest - Providing custumer detaild..
+16:36:19.523 [main] INFO  testCases.TC001_AccountRegistrationTest - Validate expected message..
+16:36:21.061 [main] INFO  testCases.TC001_AccountRegistrationTest - **Finished TC001_AccountRegistrationTes**
