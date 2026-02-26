@@ -12,13 +12,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
-//import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.firefox.FirefoxDriver;
-//import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -27,105 +23,77 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	public static WebDriver driver;
-	public Logger logger;// Log4j
-	public Properties p;
+    public static WebDriver driver;
+    public Logger logger;
+    public Properties p;
 
-	@BeforeClass(groups = { "Sanity", "Regression", "Master" })
-	@Parameters({ "os", "browser" })
-	public void setup(String os, String br) throws IOException {
-		// loading config file
-		FileReader file = new FileReader("./src//test//resources//config.properties");
-		p = new Properties();
-		p.load(file);
+    @BeforeClass(groups = { "Sanity", "Regression", "Master" })
+    @Parameters({ "os", "browser" })
+    public void setup(String os, String br) throws IOException {
 
-		logger = LogManager.getLogger(this.getClass());
+        // Load config.properties
+        FileReader file = new FileReader("./src/test/resources/config.properties");
+        p = new Properties();
+        p.load(file);
 
-		/*
-		 * if (p.getProperty("execution_env").equalsIgnoreCase("remote")) {
-		 * 
-		 * DesiredCapabilities capabilities = new DesiredCapabilities();
-		 * 
-		 * // OS (SAFE CHECK) if (os.toLowerCase().contains("win")) {
-		 * capabilities.setPlatform(Platform.WIN11); } else if
-		 * (os.toLowerCase().contains("mac")) { capabilities.setPlatform(Platform.MAC);
-		 * } else { throw new RuntimeException("Invalid OS value in testng.xml : " +
-		 * os); }
-		 * 
-		 * // BROWSER switch (br.toLowerCase()) { case "chrome":
-		 * capabilities.setBrowserName("chrome"); break;
-		 * 
-		 * case "edge": capabilities.setBrowserName("MicrosoftEdge"); break;
-		 * 
-		 * default: System.out.println("No matching browser"); return; }
-		 * 
-		 * //driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
-		 * capabilities);
-		 * 
-		 * 
-		 * if (p.getProperty("execution_env").equalsIgnoreCase("local")) {
-		 * 
-		 * switch (br.toLowerCase()) { case "chrome": driver = new ChromeDriver();
-		 * break; case "edge":driver = new EdgeDriver();break; case "firefox": driver =
-		 * new FirefoxDriver(); break; default:
-		 * System.out.println("Invalid browser name.."); return; } }
-		 */
-		 if (br.equalsIgnoreCase("chrome")) {
+        // Initialize logger
+        logger = LogManager.getLogger(this.getClass());
 
-	            WebDriverManager.chromedriver().setup();   // ✅ REQUIRED
-	            driver = new ChromeDriver();               // ✅ REQUIRED
+        // Browser setup
+        if (br.equalsIgnoreCase("chrome")) {
 
-	        } else {
-	            throw new RuntimeException("Only Chrome is supported now");
-	        }
-		
+            WebDriverManager.chromedriver().setup(); // AUTO driver management
+            driver = new ChromeDriver();
 
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } else {
+            throw new RuntimeException("Browser not supported: " + br);
+        }
 
-		driver.get(p.getProperty("appURL1"));// read url from properties file
-		driver.manage().window().maximize();
-	}
+        // Common browser settings
+        driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
 
-	
+        // Open application URL
+        driver.get(p.getProperty("appURL1"));
+    }
 
-	@AfterClass(groups = { "Sanity", "Regression", "Master" })
-	public void tearDown() {
+    @AfterClass(groups = { "Sanity", "Regression", "Master" })
+    public void tearDown() {
 
-		if (driver != null) {
-			driver.quit();
-		}
-	}
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
-	public String randomString() {
-		return RandomStringUtils.randomAlphabetic(5);
-	}
+    // ================= Utility Methods =================
 
-	public String randomNumber() {
-		return RandomStringUtils.randomNumeric(10);
-	}
+    public String randomString() {
+        return RandomStringUtils.randomAlphabetic(5);
+    }
 
-	public String randomAlphaNumeric() {
-		return RandomStringUtils.randomAlphanumeric(8);
-	}
+    public String randomNumber() {
+        return RandomStringUtils.randomNumeric(10);
+    }
 
-	public String captureScreen(String tname) throws IOException {
+    public String randomAlphaNumeric() {
+        return RandomStringUtils.randomAlphanumeric(8);
+    }
 
-		if (driver == null) {
-			return "Driver is null. Screenshot not captured.";
-		}
+    public String captureScreen(String testName) throws IOException {
 
-		String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
-		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-		File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
 
-		String targetFilePath = System.getProperty("user.dir") + "\\screenshots\\" + tname + "_" + timeStamp + ".png";
+        String targetPath = System.getProperty("user.dir")
+                + File.separator + "screenshots"
+                + File.separator + testName + "_" + timeStamp + ".png";
 
-		File targetFile = new File(targetFilePath);
-		sourceFile.renameTo(targetFile);
+        File target = new File(targetPath);
+        source.renameTo(target);
 
-		return targetFilePath;
-	}
-
+        return targetPath;
+    }
 }
